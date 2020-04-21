@@ -25,14 +25,17 @@ namespace Tool3
             String Gemeentenaam = "Aalst";
 
             List<int> intlijst = db.geefStraatIds_vanGemeenteNaam(Gemeentenaam);
-            Console.WriteLine("StraatIds voor gemeente: "+ Gemeentenaam);
+            Console.WriteLine("StraatIds voor gemeente: " + Gemeentenaam);
             intlijst.ForEach(intt => Console.WriteLine(intt));
 
-            //•Als gebruiker  wil ik  alle straatnamen  van een  gemeente kunnen  opvragen(alfabetisch gesorteerd).
+            //•Als gebruiker wil ik  alle straatnamen van een  gemeente kunnen opvragen(alfabetisch gesorteerd).
+            String Gemeentenaam2 = "Aalst";
+            Console.WriteLine("Straatnamen voor gemeente: " + Gemeentenaam2);
+            List<String> straatNamenlijst = db.geefStraatnamenLijst_vanGemeenteNaam(Gemeentenaam2);
+            straatNamenlijst.Sort();
+            straatNamenlijst.ForEach(intt => Console.WriteLine(intt));
 
-
-
-       Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }

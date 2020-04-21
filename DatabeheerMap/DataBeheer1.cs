@@ -23,7 +23,8 @@ namespace Tool3
         }
         #endregion standaard stuff ( DbProviderFactory, DbConnection, constructor,... )
 
-
+        #region werkend
+        //•Als gebruiker wil ik een lijst van straatIDs kunnen opvragen voor een opgegeven gemeentenaam.
         public List<int> geefStraatIds_vanGemeenteNaam (String naamGemeente){
             SqlConnection connection = getConnection();
 
@@ -70,10 +71,59 @@ namespace Tool3
             return lg;
         }
 
+        //•Als gebruiker wil ik  alle straatnamen van een  gemeente kunnen opvragen(alfabetisch gesorteerd).
+        public List<string> geefStraatnamenLijst_vanGemeenteNaam(string gemeentenaam2)
+        {
+            SqlConnection connection = getConnection();
+            List<string> lg = new List<string>();
+
+            string queryString = "SELECT straatNaam " +
+                "FROM Straat s " +
+                "JOIN dbo.Gemeente_straat gs ON s.straatId = gs.straatId " +
+                "JOIN dbo.Gemeente g ON g.gemeenteId = gs.gemeenteId " +
+                "WHERE gemeenteNaam = @gemeenteNaam; ";
+
+
+            using (SqlCommand command = connection.CreateCommand())
+            {
+
+                command.CommandText = queryString;
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@gemeenteNaam";
+                paramId.DbType = DbType.String;
+                paramId.Value = gemeentenaam2;
+
+                command.Parameters.Add(paramId);
+                connection.Open();
+
+                try
+                {
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        string id = (string)dataReader["straatNaam"];
+                       
+                        lg.Add(id);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    return null;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return lg;
+
         }
+ 
 
+    #endregion
 
-
-
-    }
+   }
+}
 
