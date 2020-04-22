@@ -36,7 +36,7 @@ namespace Tool3.Klassen
         public override string ToString()
         {
            
-            string x = ("\n\t[Segment" + segmentID.ToString() + ", begin: " + beginknoop.ToString() + ", eind: " + eindknoop.ToString()+ "\n" );
+            string x = ("\n\t[Segment " + segmentID.ToString() + ", begin: " + beginknoop.ToString() + ", eind: " + eindknoop.ToString()+ "\n" );
             foreach (Punt punt in punten_verticles)
             {
                x += punt.ToString();

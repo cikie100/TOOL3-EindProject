@@ -6,6 +6,7 @@ namespace Tool3.Klassen
 {
     public class Straat
     {
+        #region prop
         public string gemeenteNaam { get; set; }
         public string ProvincieNaam {get; set; }
         public int StraatID { get; set; }
@@ -13,6 +14,7 @@ namespace Tool3.Klassen
         public int GraafId { get; set; }
 
         public List<Knoop> knopen { get; set; }
+        #endregion
 
         public Straat(int straatID, string straatnaam, string gemeenteNaam, string provincieNaam, int graafId)
         {

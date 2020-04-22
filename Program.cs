@@ -23,17 +23,22 @@ namespace Tool3
             #endregion databank
 
             //•Als gebruiker wil ik een lijst van straatIDs kunnen opvragen voor een opgegeven gemeentenaam.
-            //String Gemeentenaam = "Aalst";
-            //StraatIdsOpvragenVanGemeenteNaam( db,  Gemeentenaam);
+            // String Gemeentenaam = "Aalst";
+            // StraatIdsOpvragenVanGemeenteNaam( db,  Gemeentenaam);
 
             //•Als gebruiker wil ik  alle straatnamen van een  gemeente kunnen opvragen(alfabetisch gesorteerd).
-            //String Gemeentenaam2 = "Aalst";
-            //StraatnamenOpvragenVanGemeenteNaam(db, Gemeentenaam2);
+            // String Gemeentenaam2 = "Aalst";
+            // StraatnamenOpvragenVanGemeenteNaam(db, Gemeentenaam2);
 
 
             // --•Als gebruiker wil ik een straat kunnen opvragen op basis van een meegegeven straatID.
-            int straatId = 15;
-            StraatOpvragenMetId(db, straatId);
+            //int straatId = 15;
+            //StraatOpvragenMetId(db, straatId);
+
+            // --•Als gebruiker   wil ik   een straat   kunnen opvragen   op basis   van de   straatnaam en   de gemeentenaam.
+           // String straatNaam = "Lageweg";
+           // String gemeenteNaam = "Antwerpen";
+           // StraatOpvragenMetStraatNaam_enGemeenteNaam(db,straatNaam, gemeenteNaam);
 
             Console.ReadLine();
         }
@@ -59,6 +64,13 @@ namespace Tool3
 
         public static void StraatOpvragenMetId(DataBeheer db, int straatId) {
             Straat x = db.geefStraat_VanStraatId(straatId);
+            Console.WriteLine(x.ToString());
+
+        }
+
+        public static void StraatOpvragenMetStraatNaam_enGemeenteNaam(DataBeheer db, string straatNaam, string gemeenteNaam)
+        {
+            Straat x = db.geefStraat_VanStraatNaam_enGemeenteNaam(straatNaam, gemeenteNaam);
             Console.WriteLine(x.ToString());
 
         }
