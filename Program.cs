@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
+using Tool3.Klassen;
 
 namespace Tool3
 {
@@ -22,20 +23,45 @@ namespace Tool3
             #endregion databank
 
             //•Als gebruiker wil ik een lijst van straatIDs kunnen opvragen voor een opgegeven gemeentenaam.
-            String Gemeentenaam = "Aalst";
-
-            List<int> intlijst = db.geefStraatIds_vanGemeenteNaam(Gemeentenaam);
-            Console.WriteLine("StraatIds voor gemeente: " + Gemeentenaam);
-            intlijst.ForEach(intt => Console.WriteLine(intt));
+            //String Gemeentenaam = "Aalst";
+            //StraatIdsOpvragenVanGemeenteNaam( db,  Gemeentenaam);
 
             //•Als gebruiker wil ik  alle straatnamen van een  gemeente kunnen opvragen(alfabetisch gesorteerd).
-            String Gemeentenaam2 = "Aalst";
+            //String Gemeentenaam2 = "Aalst";
+            //StraatnamenOpvragenVanGemeenteNaam(db, Gemeentenaam2);
+
+
+            // --•Als gebruiker wil ik een straat kunnen opvragen op basis van een meegegeven straatID.
+            int straatId = 15;
+            StraatOpvragenMetId(db, straatId);
+
+            Console.ReadLine();
+        }
+
+        #region methodes
+        //•Als gebruiker wil ik  alle straatnamen van een  gemeente kunnen opvragen(alfabetisch gesorteerd).
+         public static void StraatnamenOpvragenVanGemeenteNaam(DataBeheer db, String Gemeentenaam2) {
             Console.WriteLine("Straatnamen voor gemeente: " + Gemeentenaam2);
             List<String> straatNamenlijst = db.geefStraatnamenLijst_vanGemeenteNaam(Gemeentenaam2);
             straatNamenlijst.Sort();
             straatNamenlijst.ForEach(intt => Console.WriteLine(intt));
 
-            Console.ReadLine();
         }
+
+        //•Als gebruiker wil ik een lijst van straatIDs kunnen opvragen voor een opgegeven gemeentenaam.
+        public static void StraatIdsOpvragenVanGemeenteNaam(DataBeheer db, String Gemeentenaam)
+        {
+            List<int> intlijst = db.geefStraatIds_vanGemeenteNaam(Gemeentenaam);
+            Console.WriteLine("StraatIds voor gemeente: " + Gemeentenaam);
+            intlijst.ForEach(intt => Console.WriteLine(intt));
+
+        }
+
+        public static void StraatOpvragenMetId(DataBeheer db, int straatId) {
+            Straat x = db.geefStraat_VanStraatId(straatId);
+            Console.WriteLine(x.ToString());
+
+        }
+        #endregion
     }
 }
