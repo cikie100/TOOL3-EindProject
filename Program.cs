@@ -36,9 +36,9 @@ namespace Tool3
             //StraatOpvragenMetId(db, straatId);
 
             // --•Als gebruiker   wil ik   een straat   kunnen opvragen   op basis   van de   straatnaam en   de gemeentenaam.
-           // String straatNaam = "Lageweg";
-           // String gemeenteNaam = "Antwerpen";
-           // StraatOpvragenMetStraatNaam_enGemeenteNaam(db,straatNaam, gemeenteNaam);
+            // String straatNaam = "Lageweg";
+            // String gemeenteNaam = "Antwerpen";
+            // StraatOpvragenMetStraatNaam_enGemeenteNaam(db,straatNaam, gemeenteNaam);
 
             Console.ReadLine();
         }
