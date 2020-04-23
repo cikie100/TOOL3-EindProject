@@ -43,7 +43,6 @@ namespace Tool3
             // StraatOpvragenMetStraatNaam_enGemeenteNaam(db,straatNaam, gemeenteNaam);
 
             // --•Als  gebruiker  wil  ik  alle  straten  kunnen  opvragen  die  grenzen  aan  een  opgegeven  straat (straatID).
-            
             int straatid = 3;
             NaasteStratenOpvragemet_straatId(db, straatid);
 
