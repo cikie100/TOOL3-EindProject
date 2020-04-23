@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
 using Tool3.Klassen;
 
 namespace Tool3
@@ -22,11 +24,11 @@ namespace Tool3
 
             #endregion databank
 
-            //•Als gebruiker wil ik een lijst van straatIDs kunnen opvragen voor een opgegeven gemeentenaam.
+            // --•Als gebruiker wil ik een lijst van straatIDs kunnen opvragen voor een opgegeven gemeentenaam.
             // String Gemeentenaam = "Aalst";
             // StraatIdsOpvragenVanGemeenteNaam( db,  Gemeentenaam);
 
-            //•Als gebruiker wil ik  alle straatnamen van een  gemeente kunnen opvragen(alfabetisch gesorteerd).
+            // --•Als gebruiker wil ik  alle straatnamen van een  gemeente kunnen opvragen(alfabetisch gesorteerd).
             // String Gemeentenaam2 = "Aalst";
             // StraatnamenOpvragenVanGemeenteNaam(db, Gemeentenaam2);
 
@@ -39,6 +41,11 @@ namespace Tool3
             // String straatNaam = "Lageweg";
             // String gemeenteNaam = "Antwerpen";
             // StraatOpvragenMetStraatNaam_enGemeenteNaam(db,straatNaam, gemeenteNaam);
+
+            // --•Als  gebruiker  wil  ik  alle  straten  kunnen  opvragen  die  grenzen  aan  een  opgegeven  straat (straatID).
+            
+            int straatid = 3;
+            NaasteStratenOpvragemet_straatId(db, straatid);
 
             Console.ReadLine();
         }
@@ -73,6 +80,21 @@ namespace Tool3
             Straat x = db.geefStraat_VanStraatNaam_enGemeenteNaam(straatNaam, gemeenteNaam);
             Console.WriteLine(x.ToString());
 
+        }
+
+        public static void NaasteStratenOpvragemet_straatId(DataBeheer db, int straatid)
+        {
+            List<Straat> stratenDieGrenzen = db.stratenDieGrenzenZoeken(straatid);
+            List<String> stratenamen = new List<string>();
+            stratenDieGrenzen.ForEach(s => stratenamen.Add(s.Straatnaam.ToString()));
+
+            Console.WriteLine("Straten die kruisen aan straatId: " + straatid.ToString()  +" ("+stratenamen[0].ToString().Trim() +") zijn:" ); ;
+            Boolean c = stratenamen.Remove(stratenamen[0]);
+            stratenDieGrenzen.Remove(stratenDieGrenzen[0]);
+
+            stratenamen.ForEach(sn => Console.WriteLine("\t*" + sn.ToString().Trim()));
+            Console.WriteLine("\nHieronder vind u al de opgevraagde straten:\n");
+            stratenDieGrenzen.ForEach(st=> Console.WriteLine(st.ToString()+"\n-------------------Einde straat\n"));
         }
         #endregion
     }

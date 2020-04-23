@@ -102,3 +102,22 @@ SELECT DISTINCT  s.straatId, straatNaam, gemeenteNaam, provincienaam, s.GraafId
 		JOIN Segment se ON se.SegmentId = ks.SegmentId
 		JOIN Punt p ON p.SegmId = se.SegmentId
 		Where s.straatNaam = 'Lageweg' AND  g.gemeenteNaam = 'Antwerpen';
+
+
+--•Als  gebruiker  wil  ik  alle  straten  kunnen  opvragen  die  grenzen  aan  een  opgegeven  straat (straatID).
+SELECT DISTINCT  s.straatId, straatNaam, gemeenteNaam, provincienaam, s.GraafId
+
+		FROM Straat s
+		 JOIN Gemeente_straat gs ON s.straatId = gs.straatId
+		 JOIN Gemeente g ON g.gemeenteId = gs.gemeenteId
+		 JOIN Provincie_Gemeente pg ON pg.provincieID = g.gemeenteId
+		 JOIN Provincie p ON p.provincieID = pg.provincieID
+
+		  JOIN Graaf_Knoop gk ON s.GraafId = gk.GraafId
+		  JOIN Knoop k ON k.knoopId = gk.knoopId
+		  JOIN Knoop_Segment ks ON ks.knoopId = k.knoopId
+		  JOIN Segment se ON se.SegmentId = ks.SegmentId
+		  JOIN Punt pu ON pu.SegmId = se.SegmentId
+		Where se.linksStraatnaamID = 3 OR  se.rechtsStraatnaamID = 3;
+
+	--voor de knopen en segmenten te vullen gebruik ik een for(elke straat gevonden hierboven) en herbruik id de query die op straatId een straat opvroeg
